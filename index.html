@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ceiba Management — Property Management & Real Estate</title>
+<meta name="description" content="Gestión profesional de condominios en Playa del Carmen. Transparencia, experiencia y resultados. / Professional condominium management in Playa del Carmen.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── RESET & BASE ─────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'DM Sans',sans-serif;background:#0A1628;color:#E8E0D0;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* ── CSS VARIABLES ───────────────────────────────────────────────────── */
+:root{
+  --navy:   #0A1628;
+  --navy2:  #0F1E38;
+  --navy3:  #152542;
+  --gold:   #C9A84C;
+  --gold2:  #E6C878;
+  --teal:   #2A7B8C;
+  --cream:  #E8E0D0;
+  --cream2: #F5F0E8;
+  --muted:  #8A9BB0;
+  --white:  #FFFFFF;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', sans-serif;
+  --transition:   0.35s cubic-bezier(0.4,0,0.2,1);
+  --max-w: 1200px;
+}
+
+/* ── LANGUAGE TOGGLE ─────────────────────────────────────────────────── */
+body.lang-en [data-es]{display:none}
+body.lang-en [data-en]{display:block}
+body.lang-es [data-en]{display:none}
+body.lang-es [data-es]{display:block}
+[data-en],[data-es]{display:none}
+/* Default ES */
+body [data-es]{display:block}
+/* Inline elements */
+span[data-es],span[data-en],a[data-es],a[data-en],
+li[data-es],li[data-en],td[data-es],td[data-en]{display:inline}
+body.lang-en span[data-en],body.lang-en a[data-en],
+body.lang-en li[data-en],body.lang-en td[data-en]{display:inline}
+body.lang-es span[data-es],body.lang-es a[data-es],
+body.lang-es li[data-es],body.lang-es td[data-es]{display:inline}
+
+/* ── SCROLL ANIMATIONS ───────────────────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+
+/* ── NOISE TEXTURE OVERLAY ───────────────────────────────────────────── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.028;pointer-events:none;z-index:9999;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 2.5rem;
+  background:rgba(10,22,40,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,168,76,0.15);
+  transition:padding var(--transition);
+}
+nav.scrolled{padding:.9rem 2.5rem}
+.nav-logo{display:flex;align-items:center;gap:1rem}
+.nav-logo img{width:44px;height:44px;object-fit:contain;border-radius:50%}
+.nav-brand{
+  font-family:var(--font-display);
+  font-size:1.3rem;font-weight:600;
+  color:var(--cream);letter-spacing:.04em;
+}
+.nav-brand span{color:var(--gold);font-style:italic}
+.nav-links{display:flex;align-items:center;gap:2.5rem}
+.nav-links a{
+  font-size:.82rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);
+  transition:color var(--transition);position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transition:transform var(--transition);
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.lang-btn{
+  background:none;border:1px solid rgba(201,168,76,0.4);
+  color:var(--gold);font-size:.75rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;
+  padding:.35rem .8rem;border-radius:2px;cursor:pointer;
+  transition:all var(--transition);font-family:var(--font-body);
+}
+.lang-btn:hover{background:var(--gold);color:var(--navy)}
+.nav-cta{
+  background:var(--gold);color:var(--navy);
+  font-size:.78rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;padding:.5rem 1.2rem;
+  border-radius:2px;transition:all var(--transition);
+}
+.nav-cta:hover{background:var(--gold2);transform:translateY(-1px)}
+
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.4rem;background:none;border:none}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cream);transition:all var(--transition)}
+.hamburger.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+/* Mobile nav */
+.mobile-menu{
+  display:none;position:fixed;top:0;left:0;right:0;bottom:0;
+  background:var(--navy);z-index:99;flex-direction:column;
+  align-items:center;justify-content:center;gap:2.5rem;
+}
+.mobile-menu.open{display:flex}
+.mobile-menu a{
+  font-family:var(--font-display);font-size:2rem;font-weight:300;
+  color:var(--cream);letter-spacing:.05em;
+  transition:color var(--transition);
+}
+.mobile-menu a:hover{color:var(--gold)}
+.mobile-menu .lang-btn{margin-top:1rem}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+#inicio{
+  min-height:100vh;display:grid;place-items:center;
+  padding:7rem 2.5rem 4rem;
+  background:
+    radial-gradient(ellipse 70% 60% at 75% 40%, rgba(42,123,140,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 20% 70%, rgba(201,168,76,0.08) 0%, transparent 50%),
+    var(--navy);
+  position:relative;overflow:hidden;
+}
+#inicio::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.hero-inner{max-width:var(--max-w);margin:0 auto;width:100%;
+  display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-eyebrow{
+  font-size:.72rem;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.hero-eyebrow::before{content:'';width:30px;height:1px;background:var(--gold)}
+.hero-title{
+  font-family:var(--font-display);
+  font-size:clamp(2.6rem,5vw,4.2rem);
+  font-weight:300;line-height:1.1;
+  color:var(--cream);margin-bottom:1.5rem;
+}
+.hero-title em{color:var(--gold);font-style:italic}
+.hero-desc{
+  font-size:1rem;font-weight:300;line-height:1.75;
+  color:var(--muted);max-width:480px;margin-bottom:2.5rem;
+}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{
+  background:var(--gold);color:var(--navy);
+  font-size:.82rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;padding:.75rem 1.8rem;
+  border-radius:2px;transition:all var(--transition);display:inline-block;
+}
+.btn-primary:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
+.btn-secondary{
+  border:1px solid rgba(201,168,76,0.4);color:var(--cream);
+  font-size:.82rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;padding:.75rem 1.8rem;
+  border-radius:2px;transition:all var(--transition);display:inline-block;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5rem;margin-top:3rem;
+  border-top:1px solid rgba(255,255,255,0.08);padding-top:2rem;
+}
+.stat-num{
+  font-family:var(--font-display);font-size:2.4rem;font-weight:600;
+  color:var(--gold);line-height:1;
+}
+.stat-label{font-size:.75rem;color:var(--muted);margin-top:.3rem;letter-spacing:.05em}
+
+/* Hero visual right side */
+.hero-visual{position:relative;height:440px}
+.hero-card{
+  position:absolute;background:var(--navy2);
+  border:1px solid rgba(201,168,76,0.2);
+  border-radius:4px;padding:1.5rem;
+  box-shadow:0 24px 64px rgba(0,0,0,0.4);
+}
+.hero-card-main{
+  top:0;right:0;width:300px;
+  animation:float 6s ease-in-out infinite;
+}
+.hero-card-mini{
+  bottom:40px;left:0;width:220px;
+  animation:float 6s ease-in-out infinite 2s;
+}
+.hero-card-xs{
+  top:180px;left:30px;width:160px;
+  animation:float 6s ease-in-out infinite 4s;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.card-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.card-value{font-family:var(--font-display);font-size:1.8rem;font-weight:600;color:var(--cream)}
+.card-sub{font-size:.72rem;color:var(--muted);margin-top:.2rem}
+.card-row{display:flex;justify-content:space-between;margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,0.07)}
+.card-item-label{font-size:.65rem;color:var(--muted)}
+.card-item-val{font-size:.85rem;color:var(--cream);font-weight:500;margin-top:.2rem}
+
+/* ── SECTION BASE ────────────────────────────────────────────────────── */
+section{padding:6rem 2.5rem}
+.section-inner{max-width:var(--max-w);margin:0 auto}
+.section-eyebrow{
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.8rem;
+}
+.section-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold)}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(2rem,3.5vw,3rem);
+  font-weight:300;color:var(--cream);line-height:1.15;margin-bottom:1rem;
+}
+.section-title em{color:var(--gold);font-style:italic}
+.section-desc{font-size:.95rem;color:var(--muted);line-height:1.7;max-width:540px}
+
+/* ── QUIÉNES SOMOS (inline in Inicio section) ───────────────────────── */
+#quienes{
+  background:var(--navy2);
+  border-top:1px solid rgba(255,255,255,0.05);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.quienes-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.pillar-list{display:flex;flex-direction:column;gap:1.8rem;margin-top:2.5rem}
+.pillar{
+  display:flex;gap:1.2rem;align-items:flex-start;
+  padding:1.2rem;border:1px solid rgba(255,255,255,0.06);
+  border-radius:4px;
+  background:rgba(255,255,255,0.02);
+  transition:border-color var(--transition),background var(--transition);
+}
+.pillar:hover{border-color:rgba(201,168,76,0.3);background:rgba(201,168,76,0.04)}
+.pillar-num{
+  font-family:var(--font-display);font-size:2rem;font-weight:600;
+  color:var(--gold);opacity:.6;line-height:1;min-width:32px;
+}
+.pillar-title{font-weight:500;color:var(--cream);font-size:.9rem;margin-bottom:.3rem}
+.pillar-desc{font-size:.82rem;color:var(--muted);line-height:1.6}
+.quienes-img-block{position:relative}
+.img-frame{
+  width:100%;aspect-ratio:3/4;
+  background:linear-gradient(135deg, var(--navy3) 0%, var(--teal) 100%);
+  border-radius:4px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:5rem;opacity:.3;
+  border:1px solid rgba(201,168,76,0.15);
+}
+.img-overlay{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--gold);color:var(--navy);
+  padding:1.5rem;border-radius:4px;
+  font-family:var(--font-display);
+}
+.img-overlay .big{font-size:2rem;font-weight:600;line-height:1}
+.img-overlay .small{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
+
+/* ── SERVICIOS ───────────────────────────────────────────────────────── */
+#servicios{background:var(--navy)}
+.services-header{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-bottom:4rem;align-items:end}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.service-card{
+  background:var(--navy2);border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px;padding:2rem;
+  transition:all var(--transition);cursor:default;
+  position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s ease;
+}
+.service-card:hover{border-color:rgba(201,168,76,0.25);transform:translateY(-4px);box-shadow:0 20px 50px rgba(0,0,0,0.3)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;margin-bottom:1.5rem;
+}
+.service-title{
+  font-family:var(--font-display);font-size:1.3rem;font-weight:600;
+  color:var(--cream);margin-bottom:.8rem;
+}
+.service-desc{font-size:.82rem;color:var(--muted);line-height:1.7;margin-bottom:1.2rem}
+.service-list{display:flex;flex-direction:column;gap:.5rem}
+.service-list li{
+  font-size:.78rem;color:var(--muted);
+  padding-left:1rem;position:relative;line-height:1.5;
+}
+.service-list li::before{
+  content:'—';position:absolute;left:0;
+  color:var(--gold);font-size:.7rem;
+}
+
+/* ── PORTAFOLIO ──────────────────────────────────────────────────────── */
+#portafolio{
+  background:var(--navy2);
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.portfolio-header{margin-bottom:3.5rem}
+.portfolio-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:1.2rem;
+}
+.portfolio-card{
+  background:var(--navy3);border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px;padding:1.5rem 1.8rem;
+  transition:all var(--transition);
+  display:flex;flex-direction:column;gap:.6rem;
+}
+.portfolio-card:hover{
+  border-color:rgba(201,168,76,0.3);
+  transform:translateY(-3px);
+  box-shadow:0 12px 32px rgba(0,0,0,0.3);
+}
+.portfolio-name{
+  font-family:var(--font-display);font-size:1.2rem;
+  font-weight:600;color:var(--cream);
+}
+.portfolio-zone{
+  font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);
+}
+.portfolio-type{font-size:.78rem;color:var(--muted)}
+.portfolio-badge{
+  display:inline-block;margin-top:.4rem;
+  font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(42,123,140,0.2);border:1px solid rgba(42,123,140,0.4);
+  color:#6EC6D4;padding:.2rem .6rem;border-radius:2px;
+  align-self:flex-start;
+}
+
+/* ── PROCESO ─────────────────────────────────────────────────────────── */
+#proceso{background:var(--navy);padding:5rem 2.5rem}
+.proceso-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2rem;margin-top:3.5rem;position:relative;
+}
+.proceso-grid::before{
+  content:'';position:absolute;top:24px;left:12%;right:12%;
+  height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  z-index:0;
+}
+.proceso-step{position:relative;z-index:1;text-align:center}
+.proceso-num{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--navy2);border:2px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:1.1rem;font-weight:600;
+  color:var(--gold);margin:0 auto 1.2rem;
+}
+.proceso-title{font-family:var(--font-display);font-size:1.1rem;color:var(--cream);margin-bottom:.5rem;font-weight:600}
+.proceso-desc{font-size:.78rem;color:var(--muted);line-height:1.65}
+
+/* ── CONTACTO ────────────────────────────────────────────────────────── */
+#contacto{
+  background:
+    radial-gradient(ellipse 60% 50% at 30% 50%, rgba(201,168,76,0.07) 0%, transparent 60%),
+    var(--navy2);
+  border-top:1px solid rgba(255,255,255,0.05);
+}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-info{display:flex;flex-direction:column;gap:2rem;margin-top:2.5rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-icon{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(201,168,76,0.1);border:1px solid rgba(201,168,76,0.25);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;flex-shrink:0;
+}
+.contact-item-title{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.contact-item-val{font-size:.9rem;color:var(--cream)}
+.contact-form{
+  background:var(--navy3);border:1px solid rgba(255,255,255,0.07);
+  border-radius:4px;padding:2.5rem;
+}
+.form-title{font-family:var(--font-display);font-size:1.4rem;color:var(--cream);margin-bottom:.5rem;font-weight:600}
+.form-subtitle{font-size:.82rem;color:var(--muted);margin-bottom:2rem}
+.form-group{margin-bottom:1.2rem}
+.form-group label{
+  display:block;font-size:.72rem;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;
+}
+.form-group input,.form-group textarea,.form-group select{
+  width:100%;background:rgba(255,255,255,0.04);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:3px;padding:.75rem 1rem;
+  color:var(--cream);font-family:var(--font-body);font-size:.88rem;
+  transition:border-color var(--transition);outline:none;
+}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{
+  border-color:var(--gold);
+}
+.form-group textarea{resize:vertical;min-height:100px}
+.form-group select option{background:var(--navy2);color:var(--cream)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn-submit{
+  width:100%;background:var(--gold);color:var(--navy);
+  border:none;font-family:var(--font-body);
+  font-size:.82rem;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;padding:.9rem;
+  border-radius:3px;cursor:pointer;
+  transition:all var(--transition);margin-top:.8rem;
+}
+.btn-submit:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 24px rgba(201,168,76,0.3)}
+.form-success{
+  display:none;text-align:center;padding:2rem;
+  color:var(--gold);font-family:var(--font-display);font-size:1.2rem;
+}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
+footer{
+  background:var(--navy);border-top:1px solid rgba(255,255,255,0.06);
+  padding:3rem 2.5rem;
+}
+.footer-inner{
+  max-width:var(--max-w);margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.5rem;
+}
+.footer-brand{font-family:var(--font-display);font-size:1.1rem;color:var(--muted)}
+.footer-brand span{color:var(--gold)}
+.footer-links{display:flex;gap:2rem}
+.footer-links a{font-size:.78rem;color:var(--muted);transition:color var(--transition)}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:.72rem;color:rgba(138,155,176,0.5)}
+
+/* ── BACK TO TOP ─────────────────────────────────────────────────────── */
+.back-top{
+  position:fixed;bottom:2rem;right:2rem;z-index:50;
+  width:40px;height:40px;background:var(--gold);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--navy);font-size:1rem;
+  opacity:0;transform:translateY(10px);
+  transition:all var(--transition);cursor:pointer;border:none;
+  box-shadow:0 4px 16px rgba(201,168,76,0.35);
+}
+.back-top.visible{opacity:1;transform:translateY(0)}
+.back-top:hover{background:var(--gold2);transform:translateY(-3px)}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .quienes-grid,.contact-grid{grid-template-columns:1fr}
+  .services-header{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:repeat(2,1fr)}
+  .proceso-grid{grid-template-columns:repeat(2,1fr)}
+  .proceso-grid::before{display:none}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .img-frame{aspect-ratio:4/3}
+}
+@media(max-width:580px){
+  section{padding:4rem 1.2rem}
+  nav{padding:.9rem 1.2rem}
+  .services-grid{grid-template-columns:1fr}
+  .proceso-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .hero-stats{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body class="lang-es">
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#inicio" onclick="closeMobile()" data-es>Inicio</a>
+  <a href="#inicio" onclick="closeMobile()" data-en>Home</a>
+  <a href="#quienes" onclick="closeMobile()" data-es>Quiénes Somos</a>
+  <a href="#quienes" onclick="closeMobile()" data-en>About Us</a>
+  <a href="#servicios" onclick="closeMobile()" data-es>Servicios</a>
+  <a href="#servicios" onclick="closeMobile()" data-en>Services</a>
+  <a href="#portafolio" onclick="closeMobile()" data-es>Portafolio</a>
+  <a href="#portafolio" onclick="closeMobile()" data-en>Portfolio</a>
+  <a href="#contacto" onclick="closeMobile()" data-es>Contacto</a>
+  <a href="#contacto" onclick="closeMobile()" data-en>Contact</a>
+  <button class="lang-btn" onclick="toggleLang()">ES / EN</button>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <div style="width:44px;height:44px;border-radius:50%;background:var(--navy3);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:1.1rem;color:var(--gold);font-weight:600;">C</div>
+    <div class="nav-brand">Ceiba <span>Management</span></div>
+  </div>
+  <div class="nav-links">
+    <a href="#inicio"     data-es>Inicio</a>
+    <a href="#inicio"     data-en>Home</a>
+    <a href="#quienes"    data-es>Quiénes Somos</a>
+    <a href="#quienes"    data-en>About Us</a>
+    <a href="#servicios"  data-es>Servicios</a>
+    <a href="#servicios"  data-en>Services</a>
+    <a href="#portafolio" data-es>Portafolio</a>
+    <a href="#portafolio" data-en>Portfolio</a>
+    <a href="#contacto"   data-es>Contacto</a>
+    <a href="#contacto"   data-en>Contact</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem">
+    <button class="lang-btn" onclick="toggleLang()" id="langBtn">EN</button>
+    <a href="#contacto" class="nav-cta" data-es>Contáctanos</a>
+    <a href="#contacto" class="nav-cta" data-en>Contact Us</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMobile()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow reveal">
+        <span data-es>Playa del Carmen, México</span>
+        <span data-en>Playa del Carmen, Mexico</span>
+      </div>
+      <h1 class="hero-title reveal">
+        <span data-es>Gestión de<br>condominios con<br><em>excelencia</em></span>
+        <span data-en>Condominium<br>management with<br><em>excellence</em></span>
+      </h1>
+      <p class="hero-desc reveal">
+        <span data-es>Protegemos y hacemos crecer tu inversión con total transparencia, experiencia profunda y resultados comprobados en las mejores comunidades de Playa del Carmen.</span>
+        <span data-en>We protect and grow your investment with full transparency, deep expertise, and proven results across Playa del Carmen's finest communities.</span>
+      </p>
+      <div class="hero-btns reveal">
+        <a href="#contacto" class="btn-primary" data-es>Solicitar propuesta</a>
+        <a href="#contacto" class="btn-primary" data-en>Request a proposal</a>
+        <a href="#portafolio" class="btn-secondary" data-es>Ver portafolio</a>
+        <a href="#portafolio" class="btn-secondary" data-en>View portfolio</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label" data-es>Comunidades gestionadas</div>
+          <div class="stat-label" data-en>Communities managed</div>
+        </div>
+        <div>
+          <div class="stat-num">500+</div>
+          <div class="stat-label" data-es>Unidades bajo gestión</div>
+          <div class="stat-label" data-en>Units under management</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label" data-es>Transparencia financiera</div>
+          <div class="stat-label" data-en>Financial transparency</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual reveal-right">
+      <div class="hero-card hero-card-main">
+        <div class="card-label" data-es>Estado de cuenta</div>
+        <div class="card-label" data-en>Account statement</div>
+        <div class="card-value">$182,543</div>
+        <div class="card-sub" data-es>Saldo en banco — Abril 2026</div>
+        <div class="card-sub" data-en>Bank balance — April 2026</div>
+        <div class="card-row">
+          <div>
+            <div class="card-item-label" data-es>Ingresos</div>
+            <div class="card-item-label" data-en>Income</div>
+            <div class="card-item-val" style="color:#6EC6D4">+$217,011</div>
+          </div>
+          <div>
+            <div class="card-item-label" data-es>Egresos</div>
+            <div class="card-item-label" data-en>Expenses</div>
+            <div class="card-item-val" style="color:#F08080">-$181,883</div>
+          </div>
+          <div>
+            <div class="card-item-label" data-es>Resultado</div>
+            <div class="card-item-label" data-en>Result</div>
+            <div class="card-item-val" style="color:var(--gold)">+$35,128</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card hero-card-mini">
+        <div class="card-label" data-es>Recuperación cartera</div>
+        <div class="card-label" data-en>Collections</div>
+        <div class="card-value" style="font-size:1.4rem">94.3%</div>
+        <div class="card-sub" data-es>Tasa de cobro mensual</div>
+        <div class="card-sub" data-en>Monthly collection rate</div>
+      </div>
+      <div class="hero-card hero-card-xs">
+        <div class="card-label">Comunidades</div>
+        <div class="card-value" style="font-size:1.2rem;color:var(--gold)">10+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIÉNES SOMOS -->
+<section id="quienes">
+  <div class="section-inner">
+    <div class="quienes-grid">
+      <div>
+        <div class="section-eyebrow reveal">
+          <span data-es>Quiénes somos</span>
+          <span data-en>About us</span>
+        </div>
+        <h2 class="section-title reveal">
+          <span data-es>Un socio estratégico para tu <em>comunidad</em></span>
+          <span data-en>A strategic partner for your <em>community</em></span>
+        </h2>
+        <p class="section-desc reveal">
+          <span data-es>En Ceiba Management ofrecemos un servicio ejecutivo boutique donde cada propietario tiene acceso directo a los tomadores de decisiones. No somos una firma masiva — somos tu equipo dedicado.</span>
+          <span data-en>At Ceiba Management we offer a boutique executive service where every owner has direct access to decision-makers. We're not a mass-market firm — we're your dedicated team.</span>
+        </p>
+        <div class="pillar-list">
+          <div class="pillar reveal">
+            <div class="pillar-num">1</div>
+            <div>
+              <div class="pillar-title" data-es>Transparencia total</div>
+              <div class="pillar-title" data-en>Full transparency</div>
+              <div class="pillar-desc" data-es>Reportes financieros en tiempo real y comunicación abierta con todos los propietarios.</div>
+              <div class="pillar-desc" data-en>Real-time financial reports and open communication with all owners.</div>
+            </div>
+          </div>
+          <div class="pillar reveal">
+            <div class="pillar-num">2</div>
+            <div>
+              <div class="pillar-title" data-es>Experiencia probada</div>
+              <div class="pillar-title" data-en>Proven experience</div>
+              <div class="pillar-desc" data-es>Historial comprobado en las comunidades más prestigiosas de Playa del Carmen.</div>
+              <div class="pillar-desc" data-en>Proven track record in the most prestigious communities of Playa del Carmen.</div>
+            </div>
+          </div>
+          <div class="pillar reveal">
+            <div class="pillar-num">3</div>
+            <div>
+              <div class="pillar-title" data-es>Resultados reales</div>
+              <div class="pillar-title" data-en>Real results</div>
+              <div class="pillar-desc" data-es>Mayor valor patrimonial y propietarios satisfechos en cada comunidad que gestionamos.</div>
+              <div class="pillar-desc" data-en>Higher property values and satisfied owners in every community we manage.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="quienes-img-block reveal-right">
+        <div class="img-frame">🌳</div>
+        <div class="img-overlay">
+          <div class="big">Excellence</div>
+          <div class="small">· Transparency · Results</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section id="servicios">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-eyebrow reveal">
+          <span data-es>Nuestros servicios</span>
+          <span data-en>Our services</span>
+        </div>
+        <h2 class="section-title reveal">
+          <span data-es>Un enfoque <em>integral</em></span>
+          <span data-en>An <em>integrated</em> approach</span>
+        </h2>
+      </div>
+      <p class="section-desc reveal" style="align-self:end">
+        <span data-es>Tres pilares que cubren cada aspecto de la gestión de tu condominio — legal, operacional y seguridad.</span>
+        <span data-en>Three pillars covering every aspect of your condominium management — legal, operational, and security.</span>
+      </p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card reveal">
+        <div class="service-icon">⚖️</div>
+        <div class="service-title" data-es>Legal &amp; Administrativa</div>
+        <div class="service-title" data-en>Legal &amp; Administrative</div>
+        <p class="service-desc" data-es>Control financiero completo con total transparencia y cumplimiento legal.</p>
+        <p class="service-desc" data-en>Complete financial control with full transparency and legal compliance.</p>
+        <ul class="service-list">
+          <li data-es>Estados financieros mensuales</li>
+          <li data-en>Monthly financial statements</li>
+          <li data-es>Presupuesto anual de operación</li>
+          <li data-en>Annual operating budget</li>
+          <li data-es>Control de ingresos y egresos</li>
+          <li data-en>Income &amp; expense control</li>
+          <li data-es>Cobranza y recibos de pago</li>
+          <li data-en>Collections &amp; payment receipts</li>
+          <li data-es>Asesoría fiscal y contable</li>
+          <li data-en>Tax and accounting advisory</li>
+          <li data-es>Trámites notariales</li>
+          <li data-en>Notarial procedures</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">🏗️</div>
+        <div class="service-title" data-es>Operacional</div>
+        <div class="service-title" data-en>Operational</div>
+        <p class="service-desc" data-es>Supervisión diaria y gestión eficiente de todas las áreas comunes.</p>
+        <p class="service-desc" data-en>Daily supervision and efficient management of all common areas.</p>
+        <ul class="service-list">
+          <li data-es>Recorridos diarios del edificio</li>
+          <li data-en>Daily building walkthroughs</li>
+          <li data-es>Supervisión de proveedores</li>
+          <li data-en>Vendor &amp; contractor oversight</li>
+          <li data-es>Gestión de alberca y jardines</li>
+          <li data-en>Pool &amp; landscaping management</li>
+          <li data-es>Mantenimiento preventivo y correctivo</li>
+          <li data-en>Preventive &amp; corrective maintenance</li>
+          <li data-es>Juntas bimestrales de comité</li>
+          <li data-en>Bi-monthly board meetings</li>
+          <li data-es>Iniciativas de mejora y plusvalía</li>
+          <li data-en>Improvement &amp; property value initiatives</li>
+        </ul>
+      </div>
+
+      <div class="service-card reveal">
+        <div class="service-icon">🛡️</div>
+        <div class="service-title" data-es>Seguridad &amp; Vigilancia</div>
+        <div class="service-title" data-en>Security &amp; Surveillance</div>
+        <p class="service-desc" data-es>Protocolos profesionales de seguridad adaptados al tamaño y perfil de tu comunidad.</p>
+        <p class="service-desc" data-en>Professional security protocols tailored to your community's size and profile.</p>
+        <ul class="service-list">
+          <li data-es>Control de acceso vehicular y peatonal</li>
+          <li data-en>Vehicle &amp; pedestrian access control</li>
+          <li data-es>Registro de visitantes y proveedores</li>
+          <li data-en>Visitor &amp; vendor tracking</li>
+          <li data-es>Patrullaje de áreas comunes</li>
+          <li data-en>Common area patrol procedures</li>
+          <li data-es>Alianzas con empresas de seguridad certificadas</li>
+          <li data-en>Certified security firm partnerships</li>
+          <li data-es>Planes de protección civil</li>
+          <li data-en>Civil protection safety plans</li>
+          <li data-es>Protocolos de respuesta a emergencias</li>
+          <li data-en>Emergency response protocols</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-inner">
+    <div style="text-align:center;max-width:560px;margin:0 auto">
+      <div class="section-eyebrow reveal" style="justify-content:center">
+        <span data-es>Cómo trabajamos</span>
+        <span data-en>How we work</span>
+      </div>
+      <h2 class="section-title reveal" style="text-align:center">
+        <span data-es>Proceso de <em>incorporación</em></span>
+        <span data-en><em>Onboarding</em> process</span>
+      </h2>
+    </div>
+    <div class="proceso-grid">
+      <div class="proceso-step reveal">
+        <div class="proceso-num">01</div>
+        <div class="proceso-title" data-es>Auditoría</div>
+        <div class="proceso-title" data-en>Audit</div>
+        <p class="proceso-desc" data-es>Revisión de contratos, estatus legal, registros financieros e identificación de brechas.</p>
+        <p class="proceso-desc" data-en>Review of contracts, legal status, financial records and gap identification.</p>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">02</div>
+        <div class="proceso-title" data-es>Preparación</div>
+        <div class="proceso-title" data-en>Preparation</div>
+        <p class="proceso-desc" data-es>Evaluación de personal, revisión de proveedores y configuración de sistemas contables.</p>
+        <p class="proceso-desc" data-en>Staff evaluation, vendor review and accounting systems setup.</p>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">03</div>
+        <div class="proceso-title" data-es>Lanzamiento</div>
+        <div class="proceso-title" data-en>Launch</div>
+        <p class="proceso-desc" data-es>Activación de protocolos de acceso, despliegue de seguridad y comunicación con propietarios.</p>
+        <p class="proceso-desc" data-en>Access protocol activation, security deployment and owner communications.</p>
+      </div>
+      <div class="proceso-step reveal">
+        <div class="proceso-num">04</div>
+        <div class="proceso-title" data-es>Optimización</div>
+        <div class="proceso-title" data-en>Optimization</div>
+        <p class="proceso-desc" data-es>Revisión mensual de desempeño, refinamiento de presupuesto y planificación estratégica.</p>
+        <p class="proceso-desc" data-en>Monthly performance review, budget refinement and strategic long-term planning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="section-inner">
+    <div class="portfolio-header">
+      <div class="section-eyebrow reveal">
+        <span data-es>Comunidades que gestionamos</span>
+        <span data-en>Communities we manage</span>
+      </div>
+      <h2 class="section-title reveal">
+        <span data-es>Confianza en las mejores <em>comunidades</em></span>
+        <span data-en>Trusted by Playa del Carmen's finest <em>communities</em></span>
+      </h2>
+      <p class="section-desc reveal">
+        <span data-es>De fraccionamientos exclusivos a condominios boutique — gestionamos con el mismo nivel de excelencia.</span>
+        <span data-en>From exclusive residential complexes to boutique condominiums — we manage with the same level of excellence.</span>
+      </p>
+    </div>
+    <div class="portfolio-grid">
+      <!-- Cards -->
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Selvamar</div>
+        <div class="portfolio-name">Sool Village</div>
+        <div class="portfolio-type" data-es>Condominio residencial</div>
+        <div class="portfolio-type" data-en>Residential condominium</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Selvamar</div>
+        <div class="portfolio-name">Selvakoba</div>
+        <div class="portfolio-type" data-es>Condominio residencial</div>
+        <div class="portfolio-type" data-en>Residential condominium</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Centro</div>
+        <div class="portfolio-name">Urban Towers</div>
+        <div class="portfolio-type" data-es>Torre residencial</div>
+        <div class="portfolio-type" data-en>Residential tower</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Playacar</div>
+        <div class="portfolio-name">Quintas Pakal</div>
+        <div class="portfolio-type" data-es>Conjunto residencial</div>
+        <div class="portfolio-type" data-en>Residential complex</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Selvamar</div>
+        <div class="portfolio-name">Parque Real</div>
+        <div class="portfolio-type" data-es>Condominio residencial</div>
+        <div class="portfolio-type" data-en>Residential condominium</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Playacar</div>
+        <div class="portfolio-name">Holka'an</div>
+        <div class="portfolio-type" data-es>Condominio residencial</div>
+        <div class="portfolio-type" data-en>Residential condominium</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Playa del Carmen</div>
+        <div class="portfolio-name">Blanko 54</div>
+        <div class="portfolio-type" data-es>Edificio residencial</div>
+        <div class="portfolio-type" data-en>Residential building</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal">
+        <div class="portfolio-zone">Selvamar</div>
+        <div class="portfolio-name">Selvamar</div>
+        <div class="portfolio-type" data-es>Fraccionamiento / Régimen condominio</div>
+        <div class="portfolio-type" data-en>Master condominium regime</div>
+        <span class="portfolio-badge" data-es>Activo</span>
+        <span class="portfolio-badge" data-en>Active</span>
+      </div>
+      <div class="portfolio-card reveal" style="border-color:rgba(201,168,76,0.25);background:rgba(201,168,76,0.04)">
+        <div class="portfolio-zone" style="color:var(--muted)" data-es>Tu comunidad</div>
+        <div class="portfolio-zone" style="color:var(--muted)" data-en>Your community</div>
+        <div class="portfolio-name" style="color:var(--gold)" data-es>¿La próxima?</div>
+        <div class="portfolio-name" style="color:var(--gold)" data-en>The next one?</div>
+        <div class="portfolio-type" data-es>Conversemos sobre tu condominio</div>
+        <div class="portfolio-type" data-en>Let's talk about your condominium</div>
+        <a href="#contacto" style="margin-top:.6rem;font-size:.75rem;color:var(--gold);letter-spacing:.05em" data-es>Solicitar propuesta →</a>
+        <a href="#contacto" style="margin-top:.6rem;font-size:.75rem;color:var(--gold);letter-spacing:.05em" data-en>Request a proposal →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <div class="section-eyebrow reveal">
+          <span data-es>Contáctanos</span>
+          <span data-en>Contact us</span>
+        </div>
+        <h2 class="section-title reveal">
+          <span data-es>Construyamos algo <em>excepcional</em> juntos</span>
+          <span data-en>Let's build something <em>exceptional</em> together</span>
+        </h2>
+        <p class="section-desc reveal">
+          <span data-es>¿Listo para elevar la gestión de tu condominio? Contáctanos y te enviamos una propuesta personalizada sin costo.</span>
+          <span data-en>Ready to elevate your condominium management? Contact us and we'll send you a personalized proposal at no cost.</span>
+        </p>
+        <div class="contact-info">
+          <div class="contact-item reveal">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-title" data-es>Teléfono</div>
+              <div class="contact-item-title" data-en>Phone</div>
+              <div class="contact-item-val">+52 984 152 24 86</div>
+            </div>
+          </div>
+          <div class="contact-item reveal">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <div class="contact-item-title">Email</div>
+              <div class="contact-item-val">admonceibamanagement@gmail.com</div>
+            </div>
+          </div>
+          <div class="contact-item reveal">
+            <div class="contact-icon">🌐</div>
+            <div>
+              <div class="contact-item-title">Web</div>
+              <div class="contact-item-val">www.ceibamanagement.com.mx</div>
+            </div>
+          </div>
+          <div class="contact-item reveal">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-item-title" data-es>Ubicación</div>
+              <div class="contact-item-title" data-en>Location</div>
+              <div class="contact-item-val">Playa del Carmen, Quintana Roo, México</div>
+            </div>
+          </div>
+        </div>
+        <!-- Team -->
+        <div style="margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem">
+          <div class="reveal" style="background:var(--navy3);border:1px solid rgba(255,255,255,0.07);padding:1.2rem;border-radius:4px">
+            <div style="font-weight:500;color:var(--cream);font-size:.9rem">Tamra Soulaiman</div>
+            <div style="font-size:.72rem;color:var(--gold);margin-top:.2rem;letter-spacing:.05em" data-es>Directora de Property Management</div>
+            <div style="font-size:.72rem;color:var(--gold);margin-top:.2rem;letter-spacing:.05em" data-en>Property Management Director</div>
+          </div>
+          <div class="reveal" style="background:var(--navy3);border:1px solid rgba(255,255,255,0.07);padding:1.2rem;border-radius:4px">
+            <div style="font-weight:500;color:var(--cream);font-size:.9rem">Jorge Gutiérrez</div>
+            <div style="font-size:.72rem;color:var(--gold);margin-top:.2rem;letter-spacing:.05em" data-es>Relaciones con Clientes</div>
+            <div style="font-size:.72rem;color:var(--gold);margin-top:.2rem;letter-spacing:.05em" data-en>Client Relations &amp; Sales</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORM -->
+      <div class="contact-form reveal-right">
+        <div class="form-title" data-es>Solicitar propuesta</div>
+        <div class="form-title" data-en>Request a proposal</div>
+        <div class="form-subtitle" data-es>Sin costo · Sin compromiso · Respuesta en 24 hrs</div>
+        <div class="form-subtitle" data-en>No cost · No commitment · Response within 24 hrs</div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label data-es>Nombre *</label>
+              <label data-en>Name *</label>
+              <input type="text" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label data-es>Email *</label>
+              <label data-en>Email *</label>
+              <input type="email" required placeholder="tu@email.com">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label data-es>Teléfono</label>
+              <label data-en>Phone</label>
+              <input type="tel" placeholder="+52 984...">
+            </div>
+            <div class="form-group">
+              <label data-es>Tipo de propiedad</label>
+              <label data-en>Property type</label>
+              <select>
+                <option value="" data-es>Seleccionar...</option>
+                <option value="" data-en>Select...</option>
+                <option data-es>Condominio</option>
+                <option data-en>Condominium</option>
+                <option data-es>Torre residencial</option>
+                <option data-en>Residential tower</option>
+                <option data-es>Fraccionamiento</option>
+                <option data-en>Residential complex</option>
+                <option data-es>Otro</option>
+                <option data-en>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label data-es>Nombre del condominio / proyecto</label>
+            <label data-en>Condominium / project name</label>
+            <input type="text" placeholder="Ej. Mi Condominio">
+          </div>
+          <div class="form-group">
+            <label data-es>Mensaje</label>
+            <label data-en>Message</label>
+            <textarea data-es placeholder="Cuéntanos sobre tu comunidad y necesidades..."></textarea>
+            <textarea data-en placeholder="Tell us about your community and needs..."></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            <span data-es>Enviar solicitud →</span>
+            <span data-en>Send request →</span>
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess">
+          <div data-es>¡Gracias! Te contactaremos en menos de 24 horas. 🌳</div>
+          <div data-en>Thank you! We'll contact you within 24 hours. 🌳</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">Ceiba <span>Management</span> · Properties Management &amp; Real Estate</div>
+    <div class="footer-links">
+      <a href="#inicio" data-es>Inicio</a>
+      <a href="#inicio" data-en>Home</a>
+      <a href="#servicios" data-es>Servicios</a>
+      <a href="#servicios" data-en>Services</a>
+      <a href="#portafolio" data-es>Portafolio</a>
+      <a href="#portafolio" data-en>Portfolio</a>
+      <a href="#contacto" data-es>Contacto</a>
+      <a href="#contacto" data-en>Contact</a>
+    </div>
+    <div class="footer-copy">© 2026 Ceiba Management · Playa del Carmen, México</div>
+  </div>
+</footer>
+
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+/* ── LANGUAGE ─────────────────────────────────────────────────────────── */
+let currentLang = 'es';
+function toggleLang(){
+  currentLang = currentLang === 'es' ? 'en' : 'es';
+  document.body.className = 'lang-' + currentLang;
+  document.getElementById('langBtn').textContent = currentLang === 'es' ? 'EN' : 'ES';
+  document.documentElement.lang = currentLang;
+}
+
+/* ── NAV SCROLL ───────────────────────────────────────────────────────── */
+const nav = document.getElementById('mainNav');
+const backTop = document.getElementById('backTop');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 60){ nav.classList.add('scrolled'); backTop.classList.add('visible'); }
+  else { nav.classList.remove('scrolled'); backTop.classList.remove('visible'); }
+});
+
+/* ── MOBILE MENU ─────────────────────────────────────────────────────── */
+function toggleMobile(){
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  m.classList.toggle('open');
+  h.classList.toggle('open');
+  document.body.style.overflow = m.classList.contains('open') ? 'hidden' : '';
+}
+function closeMobile(){
+  document.getElementById('mobileMenu').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── SCROLL REVEAL ───────────────────────────────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach((el,i) => {
+  el.style.transitionDelay = (i % 4) * 0.08 + 's';
+  observer.observe(el);
+});
+
+/* ── FORM SUBMIT ─────────────────────────────────────────────────────── */
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+/* ── ACTIVE NAV LINK ─────────────────────────────────────────────────── */
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.style.color = a.getAttribute('href') === '#'+current ? 'var(--cream)' : '';
+  });
+});
+</script>
+</body>
+</html>
